@@ -1,1 +1,39 @@
 # laravel_13_vue
+- run "docker compose up -d"
+- add following line in hosts file
+- 127.0.0.0 laravel_13_vue.local
+- if docker is installed in a vm use its ip
+
+- open docker container console and run the following command to install laravel installer
+-- composer global require laravel/installer if it is not installed in dockerfile
+-- export PATH="$HOME/.config/composer/vendor/bin:$HOME/.composer/vendor/bin:$PATH"
+- create a folder code, 
+- but need to install laravel into another folder, otherwise laravel installer will says folder is not empty
+- you can move files from other folder to code folder after laravel installation
+-- laravel new laravel_13_vue
+- it will asks some questions
+- Do you want to use a starter Kit?
+-- yes
+- which frontend stack should your starter kit use?
+-- React
+-- Svelte
+-- Vue -> select
+-- Livewire
+- Which authentication provider do you prefer?
+-- Laravel's built-in authentication -> select
+-- WorkOS (Requires WorkOS account)
+- Would you like to add teams support to your application?
+-- yes
+-- no -> select
+- let it install the project
+-- The command "'npm' 'install'" failed.
+- now move files to code folder
+- mv /var/www/html/laravel_13_vue/vendor/* /var/www/html/vendor/
+- cd laravel_13_vue
+- rm -rf vendor
+- mv /var/www/html/laravel_13_vue/* /var/www/html/
+- cd /var/www/html
+- npm install --ignore-scripts
+- npm run build
+- open project in browser http://laravel_13_vue.local/
+- now you can register and login
