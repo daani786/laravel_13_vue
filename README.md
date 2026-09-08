@@ -37,3 +37,8 @@
 - npm run build
 - open project in browser http://laravel_13_vue.local/
 - now you can register and login
+
+- create model
+- php artisan make:model Product -m
+- update model and migration and then run migration
+- php artisan migrate
