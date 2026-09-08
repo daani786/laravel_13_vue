@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
 import { defineConfig, lazyPlugins } from 'vite-plus';
+import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
     plugins: lazyPlugins(() => [
@@ -31,8 +32,24 @@ export default defineConfig({
             formVariants: true,
         }),
     ]),
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
+        },
+    },
     server: {
+        // added for Vite HMR to work with Docker and Laravel
+        host: '0.0.0.0',
+        port: 5173,
+        hmr: {
+            host: 'laravel_13_vue.local',
+            clientPort: 5173,
+        },
+        cors: true, // <--- Add this line to allow CORS
+        strictPort: true,
+        origin: 'http://laravel_13_vue.local:5173', // <--- Add this line
         watch: {
+            usePolling: true, // <--- Forces Vite to poll for file changes
             ignored: [
                 '**/.agents/**',
                 '**/.claude/**',

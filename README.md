@@ -38,7 +38,67 @@
 - open project in browser http://laravel_13_vue.local/
 - now you can register and login
 
+For hot reloading during development, open the container console and run:
+
+- cd /var/www/html
+- npm run dev
+
+Keep the Vite process running while using the application. Vite is configured
+to poll the bind-mounted files and is available on port 5173.
+
 - create model
 - php artisan make:model Product -m
 - update model and migration and then run migration
 - php artisan migrate
+
+- without the Vite development server, execute `npm run build` after changes to
+  update the production assets
+- search icons here https://lucide.dev/icons/
+
+
+
+
+
+
+
+
+
+
+<!-- echo "127.0.0.1 laravel_13_vue.local" | sudo tee -a /etc/hosts -->
+<!-- Error and their fixes  -->
+- Error
+-- Hot reloading
+- Fix
+-- Allow 5173 port in compose.yaml
+-- Add following in server key in vite.config.ts
+--  server: {
+      // added for Vite HMR to work with Docker and Laravel
+      host: '0.0.0.0',
+      port: 5173,
+      hmr: {
+          host: 'laravel_13_vue.local',
+          clientPort: 5173,
+      },
+      cors: true, // <--- Add this line to allow CORS
+      strictPort: true,
+      origin: 'http://laravel_13_vue.local:5173',
+
+- Error
+-- http://localhost:5173/node_modules/vue-sonner/lib/index.css is getting ns_error_connection_refused
+- Fix
+-- remove import 'vue-sonner/style.css'; from code\resources\js\components\ui\sonner\Sonner.vue
+-- add @import 'vue-sonner/style.css'; in code\resources\css\app.css
+-- add resolve in vite.config.ts
+-- resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
+    },
+  },
+
+
+- Error
+-- failed to load config from /var/www/html/vite.config.ts
+-- error when starting dev server:
+-- ReferenceError: fileURLToPath is not defined
+- Fix
+-- Add import { fileURLToPath, URL } from 'node:url'; in code\vite.config.ts

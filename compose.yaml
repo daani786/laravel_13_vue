@@ -14,9 +14,12 @@ services:
       # - /var/www/html/vendor
       # - /var/www/html/node_modules
       - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "5173:5173"  # <--- Add this line to map the Vite port
     environment:
       # Nginx-proxy reads this to route traffic
       - VIRTUAL_HOST=laravel_13_vue.local
+      - VIRTUAL_PORT=80 
     networks:
       - web_proxy
 

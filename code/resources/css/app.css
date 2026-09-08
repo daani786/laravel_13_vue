@@ -7,6 +7,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@import 'vue-sonner/style.css';
+
 @theme inline {
     --font-sans:
         Instrument Sans, ui-sans-serif, system-ui, sans-serif,
