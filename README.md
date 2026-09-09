@@ -42,10 +42,8 @@ For hot reloading during development, open the container console and run:
 
 - cd /var/www/html
 - npm run dev
-
-Keep the Vite process running while using the application. Vite is configured
-to poll the bind-mounted files and is available on port 5173.
-
+- open project in browser http://laravel_13_vue.local/
+--------------------------------------------------------------------------------------------------
 - create model
 - php artisan make:model Product -m
 - update model and migration and then run migration
@@ -69,6 +67,8 @@ to poll the bind-mounted files and is available on port 5173.
 - Error
 -- Hot reloading
 - Fix
+Keep the Vite process running while using the application. Vite is configured
+to poll the bind-mounted files and is available on port 5173.
 -- Allow 5173 port in compose.yaml
 -- Add following in server key in vite.config.ts
 --  server: {
