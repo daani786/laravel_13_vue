@@ -23,7 +23,6 @@ class ProductController extends Controller
     public function store(FormProductRequest $request)
     {
         Product::create($request->validated());
-        return to_route('products.index');
-        // ->with('success', 'Product created successfully.');
+        return to_route('products.index')->with('message', 'Product created successfully.');
     }
 }
