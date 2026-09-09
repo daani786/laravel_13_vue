@@ -55,7 +55,12 @@ For hot reloading during development, open the container console and run:
 - php artisan make:controller ProductController
 - check route list
 - php artisan route:list
-
+- install card component from shadcn
+-- npx shadcn-vue@latest add card
+- install textarea component
+-- npx shadcn-vue@latest add textarea
+- add form request
+-- php artisan make:request FormProductRequest
 
 
 
