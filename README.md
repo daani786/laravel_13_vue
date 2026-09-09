@@ -43,15 +43,21 @@ For hot reloading during development, open the container console and run:
 - cd /var/www/html
 - npm run dev
 - open project in browser http://laravel_13_vue.local/
+- without the Vite development server, execute `npm run build` after changes to
+  update the production assets
+- search icons here https://lucide.dev/icons/
 --------------------------------------------------------------------------------------------------
 - create model
 - php artisan make:model Product -m
 - update model and migration and then run migration
 - php artisan migrate
+- create controller
+- php artisan make:controller ProductController
+- check route list
+- php artisan route:list
 
-- without the Vite development server, execute `npm run build` after changes to
-  update the production assets
-- search icons here https://lucide.dev/icons/
+
+
 
 
 

@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
+import products from '@/routes/products/index.js';
 
 const mainNavItems: NavItem[] = [
     {
@@ -24,8 +25,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Products-List',
-        href: '/products',
+        title: 'Products',
+        href: products.index(),
         icon: SquareChartGantt,
     },
 ];
