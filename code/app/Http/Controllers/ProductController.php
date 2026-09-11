@@ -10,11 +10,20 @@ use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $products = Product::query();
+        $keyword = $request->get('search');
+        if ($keyword != null && $keyword != '') {
+            $products->where('name', 'like', "%$keyword%")
+                ->orWhere('description', 'like', "%$keyword%")
+                ->orderBy('id', 'DESC')->paginate(10);
+
+        }
         return Inertia::render('products/index', [
+            'search' => $keyword,
             'collection' => ProductResource::collection(
-                Product::orderBy('id', 'DESC')->paginate(10)
+                $products->orderBy('id', 'DESC')->paginate(10)
             ),
         ]);
     }

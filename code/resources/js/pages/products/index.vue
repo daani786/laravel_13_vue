@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, Form } from '@inertiajs/vue3';
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
 import { dashboard } from '@/routes';
 import products from '@/routes/products/index.js';
@@ -12,6 +12,9 @@ import TableRow from '@/components/ui/table/TableRow.vue';
 import TableHead from '@/components/ui/table/TableHead.vue';
 import TableBody from '@/components/ui/table/TableBody.vue';
 import TableCell from '@/components/ui/table/TableCell.vue';
+import Input from '@/components/ui/input/Input.vue';
+import { Search } from '@lucide/vue';
+import ForgotPassword from '../auth/ForgotPassword.vue';
 
 defineOptions({
     layout: {
@@ -30,6 +33,7 @@ defineOptions({
 
 const props = defineProps<{
     collection: Product,
+    search: string | null
 }>();
 console.log('collection', props.collection);
 </script>
@@ -46,6 +50,13 @@ console.log('collection', props.collection);
           <Plus /> Add Product
           </Link>
         </Button>
+      </div>
+      <div class="mb-0">
+        <Form method="get" :href="products.index()" class="flex gap-2">
+            <Input name="search" :defaultValue="search ?? ''" placeholder="Search products..." class="max-w-sm" />
+                <Button variant="secondary"><Search class="mr-2 h4 w-4" />Search
+            </Button>
+        </Form>
       </div>
       <Table>
         <TableHeader>
