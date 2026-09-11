@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Http\Requests\FormProductRequest;
-
+use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        return Inertia::render('products/index', []);
+        return Inertia::render('products/index', [
+            'collection' => ProductResource::collection(Product::orderBy('id', 'DESC')->get()),
+        ]);
     }
     public function create()
     {

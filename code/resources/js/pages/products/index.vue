@@ -5,6 +5,13 @@ import { dashboard } from '@/routes';
 import products from '@/routes/products/index.js';
 import Button from '@/components/ui/button/Button.vue';
 import { Plus } from '@lucide/vue';
+import Product from '@/types/Product.ts';
+import Table from '@/components/ui/table/Table.vue';
+import TableHeader from '@/components/ui/table/TableHeader.vue';
+import TableRow from '@/components/ui/table/TableRow.vue';
+import TableHead from '@/components/ui/table/TableHead.vue';
+import TableBody from '@/components/ui/table/TableBody.vue';
+import TableCell from '@/components/ui/table/TableCell.vue';
 
 defineOptions({
     layout: {
@@ -20,6 +27,11 @@ defineOptions({
         ],
     },
 });
+
+const props = defineProps<{
+    collection: Product,
+}>();
+console.log('collection', props.collection);
 </script>
 
 <template>
@@ -35,5 +47,20 @@ defineOptions({
           </Link>
         </Button>
       </div>
+      <Table>
+        <TableHeader>
+            <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead class="text-end">Actions</TableHead>
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            <TableRow v-for="item in collection.data" :key="item.id">
+                <TableCell>{{ item.name  }}</TableCell>
+                <TableCell>{{ item.description }}</TableCell>
+            </TableRow>
+        </TableBody>
+      </Table>
     </div>
 </template>

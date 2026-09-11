@@ -46,6 +46,7 @@ For hot reloading during development, open the container console and run:
 - without the Vite development server, execute `npm run build` after changes to
   update the production assets
 - search icons here https://lucide.dev/icons/
+
 --------------------------------------------------------------------------------------------------
 - create model
 - php artisan make:model Product -m
@@ -56,11 +57,18 @@ For hot reloading during development, open the container console and run:
 - check route list
 - php artisan route:list
 - install card component from shadcn
+-- site link = https://ui.shadcn.com/docs/components
 -- npx shadcn-vue@latest add card
 - install textarea component
 -- npx shadcn-vue@latest add textarea
 - add form request
 -- php artisan make:request FormProductRequest
+- create resource
+-- php artisan make:resource ProductResource
+- install table component
+-- npx shadcn@latest add table => got error
+-- npx shadcn@4.20.0 add table => got error
+-- npx shadcn-vue@latest add table
 
 
 

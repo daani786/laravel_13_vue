@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Form } from '@inertiajs/vue3';
+import { Head, Form, router } from '@inertiajs/vue3';
 import { dashboard } from '@/routes';
 import products from '@/routes/products/index.js';
 import Button from '@/components/ui/button/Button.vue';
@@ -60,7 +60,7 @@ defineProps<{
                 </Card>
             </div>
             <div class="mt-8 flex justify-between md:w-200">
-                <Button variant="secondary">Cancel</Button>
+                <Button type="button" variant="secondary" @click="router.visit(products.index())">Cancel</Button>
                 <Button :disabled="processing">
                     <Save /> {{ processing ? 'Saving...' : 'Save Product' }}
                 </Button>
