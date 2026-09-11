@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Form, router } from '@inertiajs/vue3';
+import { Head, Form, router, usePage } from '@inertiajs/vue3';
 import { dashboard } from '@/routes';
 import products from '@/routes/products/index.js';
 import Button from '@/components/ui/button/Button.vue';
@@ -11,6 +11,11 @@ import InputError from '@/components/InputError.vue'
 import Textarea from '@/components/ui/textarea/Textarea.vue';
 import { Product } from '@/types';
 
+const {url} = usePage();
+let pageTitle = "Create Product";
+if (url != '/products/create') {
+    pageTitle = "Edit Product";
+}
 defineOptions({
     layout: {
         breadcrumbs: [
@@ -22,13 +27,19 @@ defineOptions({
                 title: 'Products',
                 href: products.index(),
             },
+            {
+                title: 'Product',
+                href: '',
+            },
         ],
     },
 });
 
-defineProps<{
+const props = defineProps<{
     product: Product,
 }>();
+
+const action = props.product.id ? products.update.form({product: props.product.id}) : products.store.form();
 
 </script>
 
@@ -38,9 +49,11 @@ defineProps<{
     <div
         class="flex h-full flex-1 flex-col gap-4 items-center rounded-xl p-4"
     >
-        <Form v-bind="products.store.form()" v-slot="{ errors, processing }">
+        <Form v-bind="action" v-slot="{ errors, processing }">
             <div class="-mt-16.5 mb-7.5 flex justify-between gap-4 md:w-200">
-                <h1 class="text-2xl">Create Product</h1>
+                <h1 class="text-2xl">
+                    {{ pageTitle }}
+                </h1>
                 <Button :disabled="processing">
                     <Save /> {{ processing ? 'Saving...' : 'Save Product' }}
                 </Button>

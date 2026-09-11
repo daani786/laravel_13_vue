@@ -13,8 +13,7 @@ import TableHead from '@/components/ui/table/TableHead.vue';
 import TableBody from '@/components/ui/table/TableBody.vue';
 import TableCell from '@/components/ui/table/TableCell.vue';
 import Input from '@/components/ui/input/Input.vue';
-import { Search } from '@lucide/vue';
-import ForgotPassword from '../auth/ForgotPassword.vue';
+import { Search, Pencil } from '@lucide/vue';
 
 defineOptions({
     layout: {
@@ -61,6 +60,7 @@ console.log('collection', props.collection);
       <Table>
         <TableHeader>
             <TableRow>
+                <TableHead>Id</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead class="text-end">Actions</TableHead>
@@ -68,8 +68,16 @@ console.log('collection', props.collection);
         </TableHeader>
         <TableBody>
             <TableRow v-for="item in collection.data" :key="item.id">
+                <TableCell>{{ item.id  }}</TableCell>
                 <TableCell>{{ item.name  }}</TableCell>
                 <TableCell>{{ item.description }}</TableCell>
+                <TableCell class="text-end">
+                    <Button size="sm" class="mr-2" variant="secondary" title="Edit">
+                        <Link :href="products.edit(item.id)">
+                            <Pencil />
+                        </Link>
+                    </Button>
+                </TableCell>
             </TableRow>
         </TableBody>
       </Table>

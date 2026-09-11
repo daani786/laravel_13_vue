@@ -38,4 +38,15 @@ class ProductController extends Controller
         Product::create($request->validated());
         return to_route('products.index')->with('message', 'Product created successfully.');
     }
+    public function edit(Product $product)
+    {
+        return Inertia::render('products/form', [
+            'product' => new ProductResource($product),
+        ]);
+    }
+    public function update(FormProductRequest $request, Product $product)
+    {
+        $product->update($request->validated());
+        return to_route('products.index')->with('message', 'Product updated successfully.');
+    }
 }
