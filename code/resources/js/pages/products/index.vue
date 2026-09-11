@@ -62,5 +62,18 @@ console.log('collection', props.collection);
             </TableRow>
         </TableBody>
       </Table>
+      <div class="mt-1 flex items-center justify-between">
+        <div class="text-sm text-muted-foreground">
+            Showing page {{ collection.meta.current_page }} of {{ collection.meta.last_page }} ({{ collection.meta.total }} total items )
+        </div>
+        <div class="flex gap-1" v-if="collection.meta.links.length > 3">
+            <Button v-for="(link, index) in collection.meta.links" :key="index" variant="ghost" size="sm" :disabled="!link.url" as-child>
+                <Link :href="link.url || '#'" :class="{'bg-accent': link.active}">
+                    <span v-html="link.label"></span>
+                </Link>
+            </Button>
+
+        </div>
+      </div>
     </div>
 </template>

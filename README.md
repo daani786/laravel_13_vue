@@ -69,6 +69,14 @@ For hot reloading during development, open the container console and run:
 -- npx shadcn@latest add table => got error
 -- npx shadcn@4.20.0 add table => got error
 -- npx shadcn-vue@latest add table
+- add product seeder
+-- php artisan make:factory ProductFactory --model=Product
+-- php artisan make:seeder ProductSeeder
+- To run only the Product Seeder
+-- php artisan db:seed --class=ProductSeeder
+- To refresh your database and run all seeders from scratch
+-- php artisan migrate:fresh --seed
+
 
 
 

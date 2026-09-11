@@ -13,7 +13,9 @@ class ProductController extends Controller
     public function index()
     {
         return Inertia::render('products/index', [
-            'collection' => ProductResource::collection(Product::orderBy('id', 'DESC')->get()),
+            'collection' => ProductResource::collection(
+                Product::orderBy('id', 'DESC')->paginate(10)
+            ),
         ]);
     }
     public function create()
