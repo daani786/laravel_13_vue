@@ -49,4 +49,9 @@ class ProductController extends Controller
         $product->update($request->validated());
         return to_route('products.index')->with('message', 'Product updated successfully.');
     }
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return to_route('products.index')->with('message', 'Product deleted successfully.');
+    }
 }

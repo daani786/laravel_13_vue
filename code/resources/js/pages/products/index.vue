@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, Form } from '@inertiajs/vue3';
+import { Head, Link, Form, router } from '@inertiajs/vue3';
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
 import { dashboard } from '@/routes';
 import products from '@/routes/products/index.js';
@@ -13,7 +13,7 @@ import TableHead from '@/components/ui/table/TableHead.vue';
 import TableBody from '@/components/ui/table/TableBody.vue';
 import TableCell from '@/components/ui/table/TableCell.vue';
 import Input from '@/components/ui/input/Input.vue';
-import { Search, Pencil } from '@lucide/vue';
+import { Search, Pencil, Trash } from '@lucide/vue';
 
 defineOptions({
     layout: {
@@ -35,6 +35,12 @@ const props = defineProps<{
     search: string | null
 }>();
 console.log('collection', props.collection);
+
+const onDelete = (product:any) => {
+    if (confirm('Are you sure, you want to delete this product ?')) {
+        router.delete(products.destroy(product))
+    }
+}
 </script>
 
 <template>
@@ -76,6 +82,9 @@ console.log('collection', props.collection);
                         <Link :href="products.edit(item.id)">
                             <Pencil />
                         </Link>
+                    </Button>
+                    <Button size="sm" class="mr-2" variant="destructive" title="Delete" @click="onDelete(item)">
+                        <Trash />
                     </Button>
                 </TableCell>
             </TableRow>
