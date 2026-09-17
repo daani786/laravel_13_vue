@@ -4,12 +4,12 @@ import type { BreadcrumbItem } from '@/types';
 import { usePage } from '@inertiajs/vue3';
 import { watch } from 'vue';
 import 'vue-sonner/style.css';
-import { toast, Toaster} from 'vue-sonner';
+import { toast, Toaster } from 'vue-sonner';
 
 const { breadcrumbs = [] } = defineProps<{
     breadcrumbs?: BreadcrumbItem[];
 }>();
-const page = usePage()
+const page = usePage();
 
 watch(
     () => page.props.flash,
@@ -20,10 +20,9 @@ watch(
         if (flash?.error) {
             toast.error(flash.error);
         }
-    }
-)
+    },
+);
 </script>
-
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
