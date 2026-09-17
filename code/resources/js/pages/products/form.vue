@@ -3,7 +3,7 @@ import { Head, Form, router, usePage } from '@inertiajs/vue3';
 import { dashboard } from '@/routes';
 import products from '@/routes/products/index.js';
 import Button from '@/components/ui/button/Button.vue';
-import { Save } from '@lucide/vue';
+import { Save, Upload } from '@lucide/vue';
 import Card from '@/components/ui/card/Card.vue';
 import Label from '@/components/ui/label/Label.vue';
 import Input from '@/components/ui/input/Input.vue';
@@ -42,6 +42,15 @@ const props = defineProps<{
 const action = props.product.id
     ? products.update.form({ product: props.product.id })
     : products.store.form();
+
+const handleFileChange = (event: any) => {
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    reader.onloadend = (file) => {
+        props.product.image = reader.result as string
+    };
+    reader.readAsDataURL(file);
+};
 </script>
 
 <template>
@@ -58,30 +67,44 @@ const action = props.product.id
                 </Button>
             </div>
             <div class="grid gap-4 md:w-200">
-                <Card class="md-4 p-4">
-                    <div class="grid w-full gap-2">
-                        <Label for="name">Name</Label>
-                        <Input
-                            class="mt-1 block w-full"
-                            id="name"
-                            name="name"
-                            :defaultValue="product.name"
-                            placeholder="Product Name"
-                        />
-                        <InputError :message="errors.name" />
+                <div class="flex gap-4">
+                    <div class="w-8/12">
+                        <Card class="md-4 p-4">
+                            <div class="grid w-full gap-2">
+                                <Label for="name">Name</Label>
+                                <Input
+                                    class="mt-1 block w-full"
+                                    id="name"
+                                    name="name"
+                                    :defaultValue="product.name"
+                                    placeholder="Product Name"
+                                />
+                                <InputError :message="errors.name" />
+                            </div>
+                            <div class="grid w-full gap-2">
+                                <Label for="description">Description</Label>
+                                <Textarea
+                                    class="mt-1 block w-full"
+                                    id="description"
+                                    name="description"
+                                    :defaultValue="product.description"
+                                    placeholder="Product Description"
+                                />
+                                <InputError :message="errors.description" />
+                            </div>
+                        </Card>
                     </div>
-                    <div class="grid w-full gap-2">
-                        <Label for="description">Description</Label>
-                        <Textarea
-                            class="mt-1 block w-full"
-                            id="description"
-                            name="description"
-                            :defaultValue="product.description"
-                            placeholder="Product Description"
-                        />
-                        <InputError :message="errors.description" />
+                    <div class="w-4/12">
+                        <Card class="md-4 p-4">
+                            <div class="group relative grid place-items-center overflow-hidden-rounded-md bg-muted transition-all hover:bg-primary/10 spect-square">
+                                <input id="image" type="file" name="image" :defaultValue="product.image" @change="handleFileChange" class="absolute inset-0 z-10 cursor-pointer opacity-0" multiple/>
+                                <Upload class="hidden" />
+                                <img :src="product.image ? product.image : '/apple-touch-icon.png'" class="h-50 w-50" />
+                            </div>
+                        </Card>
                     </div>
-                </Card>
+                </div>
+
             </div>
             <div class="mt-8 flex justify-between md:w-200">
                 <Button

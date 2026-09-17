@@ -90,6 +90,10 @@ For hot reloading during development, open the container console and run:
 -- php artisan migrate
 -- Publishing the config file
 -- php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-config"
+- to make uploaded images public
+-- php artisan storage:link 
+-- php artisan storage:link --relative
+-- run `composer require symfony/filesystem` because storage:link is not working
 
 
 

@@ -7,6 +7,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\UploadedFile;
 
 class ProductController extends Controller
 {
@@ -38,8 +39,8 @@ class ProductController extends Controller
 
     public function store(FormProductRequest $request)
     {
-        Product::create($request->validated());
-
+        $product = Product::create($request->validated());
+        $this->handleFormRequest($product, $request);
         return to_route('products.index')->with('message', 'Product created successfully.');
     }
 
@@ -53,7 +54,7 @@ class ProductController extends Controller
     public function update(FormProductRequest $request, Product $product)
     {
         $product->update($request->validated());
-
+        $this->handleFormRequest($product, $request);
         return to_route('products.index')->with('message', 'Product updated successfully.');
     }
 
@@ -62,5 +63,13 @@ class ProductController extends Controller
         $product->delete();
 
         return to_route('products.index')->with('message', 'Product deleted successfully.');
+    }
+
+    public function handleFormRequest(Product $product, FormProductRequest $request)
+    {
+        $image = $request->validated('image');
+        if ($image && $image instanceof UploadedFile) {
+            $product->addMedia($image)->toMediaCollection('image');
+        }
     }
 }
