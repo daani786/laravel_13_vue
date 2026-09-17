@@ -33,3 +33,5 @@ ENV TERM=xterm-256color
 
 # Add the alias permanently to the system-wide bash configuration
 RUN echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc
+
+RUN docker-php-ext-install exif

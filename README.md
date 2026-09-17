@@ -76,6 +76,21 @@ For hot reloading during development, open the container console and run:
 -- php artisan db:seed --class=ProductSeeder
 - To refresh your database and run all seeders from scratch
 -- php artisan migrate:fresh --seed
+- for image https://spatie.be/docs/laravel-medialibrary/v11/introduction
+-- composer require "spatie/laravel-medialibrary"
+-- missing ext-exif
+-- install extension ext-exif
+-- docker-php-ext-install exif
+-- check if exif installed
+-- root@874264a29f30:/var/www/html# php -m | grep exif
+-- exif
+-- composer require "spatie/laravel-medialibrary"
+-- Preparing the database
+-- php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-migrations"
+-- php artisan migrate
+-- Publishing the config file
+-- php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-config"
+
 
 
 
