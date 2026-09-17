@@ -75,6 +75,7 @@ const onDelete = (product: any) => {
             <TableHeader>
                 <TableRow>
                     <TableHead>Id</TableHead>
+                    <TableHead>Image</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Description</TableHead>
                     <TableHead class="text-end">Actions</TableHead>
@@ -83,6 +84,9 @@ const onDelete = (product: any) => {
             <TableBody>
                 <TableRow v-for="item in collection.data" :key="item.id">
                     <TableCell>{{ item.id }}</TableCell>
+                    <TableCell>
+                        <img :src="item.image ? item.image : '/apple-touch-icon.png'" class="aspect-square bg-background w-12 h-12" />
+                    </TableCell>
                     <TableCell>{{ item.name }}</TableCell>
                     <TableCell>{{ item.description }}</TableCell>
                     <TableCell class="text-end">
