@@ -95,7 +95,9 @@ For hot reloading during development, open the container console and run:
 -- php artisan storage:link --relative
 -- run `composer require symfony/filesystem` because storage:link is not working
 
-
+- zip node_modules and vendor for later use
+-- zip -r node_modules.zip node_modules
+-- zip -r vendor.zip vendor
 
 
 
